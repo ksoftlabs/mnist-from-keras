@@ -35,6 +35,9 @@ Y_test = np_utils.to_categorical(y_test, 10)
 #Define model as sequential
 model = Sequential()
 
+from keras import backend as K
+K.set_image_dim_ordering('th')
+
 #Add a convolutional layer - 32 filters and 3x3 matrix
 model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(1,28,28)))
 
