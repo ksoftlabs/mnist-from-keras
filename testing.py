@@ -18,8 +18,8 @@ y = dataset.iloc[:, 0].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
 
 # Convert 28x28 matrix into 28x28 matrix with 1 channel
-X_train = X_train.reshape(X_train.shape[0], 1, 28, 28)
-X_test = X_test.reshape(X_test.shape[0], 1, 28, 28)
+X_train = X_train.reshape(X_train.shape[0], 28, 28,1)
+X_test = X_test.reshape(X_test.shape[0], 28, 28,1)
 
 # Change range from 0-255 to 0 -1
 X_train = X_train.astype('float32')
@@ -34,15 +34,11 @@ Y_test = np_utils.to_categorical(y_test, 10)
 # Define model as sequential
 model = Sequential()
 
-from keras import backend as K
-
-K.set_image_dim_ordering('th')
+# Add a convolutional layer - 32 filters and 3x3 matrix
+model.add(Conv2D(filters=32, kernel_size=[3, 3], activation='relu', input_shape=(28, 28,1)))
 
 # Add a convolutional layer - 32 filters and 3x3 matrix
-model.add(Conv2D(32, (3, 3), activation='relu', input_shape=(1, 28, 28)))
-
-# Add a convolutional layer - 32 filters and 3x3 matrix
-model.add(Conv2D(32, (3, 3), activation='relu'))
+model.add(Conv2D(filters=32, kernel_size=[3, 3], activation='relu'))
 
 # MaxPool the resulting matrix
 model.add(MaxPooling2D(pool_size=(2, 2)))
@@ -69,7 +65,7 @@ model.compile(loss='categorical_crossentropy',
 
 # Train the model
 model.fit(X_train, Y_train,
-          batch_size=32, epochs=1, verbose=0)
+          batch_size=32, epochs=1, verbose=1)
 
 # Evaluate the model using test set
 score = model.evaluate(X_test, Y_test, verbose=1)

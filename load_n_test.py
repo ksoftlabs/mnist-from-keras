@@ -37,8 +37,8 @@ y = dataset.iloc[:, 0].values
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
 #Reshape to 28x28 matrix with 1 channel
-X_train = X_train.reshape(X_train.shape[0],1,28, 28)
-X_test = X_test.reshape(X_test.shape[0], 1, 28, 28)
+X_train = X_train.reshape(X_train.shape[0],28, 28,1)
+X_test = X_test.reshape(X_test.shape[0], 28, 28,1)
 from keras import backend as K
 K.set_image_dim_ordering('th')
 
