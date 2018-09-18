@@ -50,7 +50,7 @@ model.add(Dropout(0.25))
 model.add(Flatten())
 
 # Fully connected layer with 128 nodes
-model.add(Dense(128, activation='relu'))
+model.add(Dense(256, activation='relu'))
 
 # A drop out layer to prevent overfitting
 model.add(Dropout(0.5))
@@ -65,7 +65,7 @@ model.compile(loss='categorical_crossentropy',
 
 # Train the model
 model.fit(X_train, Y_train,
-          batch_size=32, epochs=1, verbose=1)
+          batch_size=32, epochs=5, verbose=1)
 
 # Evaluate the model using test set
 score = model.evaluate(X_test, Y_test, verbose=1)
