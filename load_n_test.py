@@ -11,13 +11,13 @@ from sklearn.model_selection import train_test_split
 
 
 #Load the JSON file with model
-json_file = open('model.json', 'r')
+json_file = open('model2.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 
 #Load weights from h5 file
-loaded_model.load_weights("model.h5")
+loaded_model.load_weights("model2.h5")
 print("Loaded model from disk")
 
 
