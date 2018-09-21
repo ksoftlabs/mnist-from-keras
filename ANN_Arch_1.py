@@ -1,5 +1,4 @@
-# Dense(300)
-#  Epochs 5
+
 import numpy as np
 import pandas as pd
 from keras.models import Sequential

@@ -4,6 +4,7 @@ import numpy as np
 from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
 import confusion_metrics
+import report
 
 #############################################################
 #
@@ -60,8 +61,11 @@ Y_test = np_utils.to_categorical(y_test, 10)
 #Test the model
 
 score = loaded_model.evaluate(X_test, Y_test, verbose=1)
+print("Testing Loss : ",score[0]," Accuracy : ",score[1]*100,"%")
+
 
 Y_predicted=loaded_model.predict(X_test)
 Y_predicted=np.argmax(Y_predicted,axis=1)
 confusion_metrics.cnf_mtrx(Y_true,Y_predicted)
-print("Testing Loss : ",score[0]," Accuracy : ",score[1]*100,"%")
+
+report.generate_report(Y_true,Y_predicted)
