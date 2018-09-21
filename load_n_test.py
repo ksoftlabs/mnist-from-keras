@@ -1,23 +1,28 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Sep 17 14:07:25 2018
-
-@author: ksoft
-"""
 from keras.models import model_from_json
 import pandas as pd
+import numpy as np
 from keras.utils import np_utils
 from sklearn.model_selection import train_test_split
+import confusion_metrics
+
+#############################################################
+#
+# Un comment the required model to run it
+#
+#############################################################
+# model='model_ANN1'
+# model='model_CNN1'
+model='model_CNN2'
 
 
 #Load the JSON file with model
-json_file = open('model3.json', 'r')
+json_file = open(model+'.json', 'r')
 loaded_model_json = json_file.read()
 json_file.close()
 loaded_model = model_from_json(loaded_model_json)
 
 #Load weights from h5 file
-loaded_model.load_weights("model3.h5")
+loaded_model.load_weights(model+".h5")
 print("Loaded model from disk")
 
 
@@ -46,10 +51,17 @@ X_test = X_test.astype('float32')
 X_train /= 255
 X_test /= 255
 
+#Save Y_true to use in confusion matrix
+Y_true=y_test
 #One hot encoding
 Y_train = np_utils.to_categorical(y_train, 10)
 Y_test = np_utils.to_categorical(y_test, 10)
 
 #Test the model
+
 score = loaded_model.evaluate(X_test, Y_test, verbose=1)
+
+Y_predicted=loaded_model.predict(X_test)
+Y_predicted=np.argmax(Y_predicted,axis=1)
+confusion_metrics.cnf_mtrx(Y_true,Y_predicted)
 print("Testing Loss : ",score[0]," Accuracy : ",score[1]*100,"%")

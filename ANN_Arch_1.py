@@ -65,11 +65,11 @@ model.fit(X_train, Y_train,
 score = model.evaluate(X_test, Y_test, verbose=1)
 print("Testing Loss : ", score[0], " Accuracy : ", score[1])
 
-# Save model as JSON fle
-model_json = model.to_json()
-with open("model3.json", "w") as json_file:
-    json_file.write(model_json)
-
-# Save weights as h5
-model.save_weights("model3.h5")
-print("Saved model to disk")
+# # Save model as JSON fle
+# model_json = model.to_json()
+# with open("model3.json", "w") as json_file:
+#     json_file.write(model_json)
+#
+# # Save weights as h5
+# model.save_weights("model3.h5")
+# print("Saved model to disk")

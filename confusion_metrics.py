@@ -1,11 +1,11 @@
 #class names= names of the target variables in the dataset
 import numpy as np
-import matplotlib.pylot as plt
+import matplotlib.pyplot as plt
 
 from sklearn.metrics import confusion_matrix
 import itertools
 
-class_names=['list of class na,es goes here']
+class_names=['0','1','2','3','4','5','6','7','8','9']
 
 def plot_confusion_matrix(cm, classes,normalize=False,title='Confusion matrix',cmap=plt.cm.Blues):
     """
@@ -42,18 +42,18 @@ def plot_confusion_matrix(cm, classes,normalize=False,title='Confusion matrix',c
     plt.xlabel('Predicted label')
 
 # Compute confusion matrix
-#pass test labels and predicted labels---- replace Y_test and predicted svm with what ever the variables
-#given by you
-cnf_matrix = confusion_matrix(Y_test,predicted_svm)
-np.set_printoptions(precision=2)
 
-# Plot non-normalized confusion matrix
-plt.figure(figsize=(10,12))
-plot_confusion_matrix(cnf_matrix, classes=class_names,
-                      title='Confusion matrix, without normalization')
-# Plot normalized confusion matrix
-plt.figure(figsize=(10,10))
-plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,
-                      title='Normalized confusion matrix')
+def cnf_mtrx(Y_test,Y_predicted):
+    cnf_matrix = confusion_matrix(Y_test,Y_predicted)
+    np.set_printoptions(precision=2)
 
-plt.show()
+    # Plot non-normalized confusion matrix
+    plt.figure(figsize=(10,12))
+    plot_confusion_matrix(cnf_matrix, classes=class_names,
+                          title='Confusion matrix, without normalization')
+    # Plot normalized confusion matrix
+    plt.figure(figsize=(10,10))
+    plot_confusion_matrix(cnf_matrix, classes=class_names, normalize=True,
+                          title='Normalized confusion matrix')
+
+    plt.show()

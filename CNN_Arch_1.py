@@ -1,4 +1,4 @@
-# Conv2D (32,3,3) -> Conv2D (32,3,3) -> MaxPooling2D(2,2) -> DropOut (0.2)  -> Flatten -> Dense (256) -> DropOut(0.5) -> Dense (10)#
+# Conv2D (32,3,3) -> Conv2D (32,3,3) -> MaxPooling2D(2,2) -> DropOut (0.25)  -> Flatten -> Dense (256) -> DropOut(0.5) -> Dense (10)#
 # Epochs 5
 import numpy as np
 import pandas as pd
@@ -73,11 +73,11 @@ model.fit(X_train, Y_train,
 score = model.evaluate(X_test, Y_test, verbose=1)
 print("Testing Loss : ", score[0], " Accuracy : ", score[1])
 
-# Save model as JSON fle
-model_json = model.to_json()
-with open("model.json", "w") as json_file:
-    json_file.write(model_json)
-
-# Save weights as h5
-model.save_weights("model.h5")
-print("Saved model to disk")
+# # Save model as JSON fle
+# model_json = model.to_json()
+# with open("model.json", "w") as json_file:
+#     json_file.write(model_json)
+#
+# # Save weights as h5
+# model.save_weights("model.h5")
+# print("Saved model to disk")
